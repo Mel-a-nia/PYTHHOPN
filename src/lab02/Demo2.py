@@ -66,15 +66,16 @@ try:
     lista.remove_at(99)
 except IndexError as e:
     print(f"\n  x {e}")
- 
+    
+print("\n" + "=" * 50)
 print("  ESCENARIO 4 — Ordenar la colección")
 print("=" * 50)
  
 lista2 = PlayerList()
-lista2.add(Player("Zelda",  level=7,  HP=90.0,  XP=300))
-lista2.add(Player("Arthur", level=2,  HP=100.0, XP=50))
-lista2.add(Player("Mega",   level=10, HP=60.0,  XP=900))
-lista2.add(Player("Cloud",  level=5,  HP=120.0, XP=150))
+lista2.add(Player("Diego",  level=7,  HP=90.0,  XP=300))
+lista2.add(Player("Alina", level=2,  HP=100.0, XP=50))
+lista2.add(Player("Lei",   level=10, HP=60.0,  XP=900))
+lista2.add(Player("Uyanga",  level=5,  HP=120.0, XP=150))
  
 lista2.sort_by_name()
 print("Ordenado por nombre:")
