@@ -1,12 +1,9 @@
 from lab01_2.Model3 import Player
 
-
 class PlayerList:
 
     def __init__(self):
         self._items = []
-
-
     def add(self, player):
         if isinstance(player, Player):
             if player in self._items:
@@ -29,7 +26,6 @@ class PlayerList:
             return eliminado
         else:
             raise IndexError(f"Índice {indice} fuera de rango")
-
 
     def get_all(self):
         return self._items
