@@ -60,7 +60,7 @@ trampa.banear()
 print(f"Estado: {trampa.status}")
  
 try:
-    trampa.recibir_danio(10)
+    trampa.recibir_daño(10)
 except RuntimeError as e:
     print(f"[Bloqueado] {e}")
  
