@@ -59,24 +59,9 @@ print("-- atacar() para todos sin usar if --")
 for jugador in lista:
     print(f"  {jugador.atacar()}")
 
-print("\n" + "=" * 55)
-print("  ESCENARIO 4 — Filtrar por tipo de jugador")
-print("=" * 55)
-
-solo_magos = lista.get_solo_magos()
-print(f"Solo magos ({len(solo_magos)}):")
-print(solo_magos)
-
-solo_arqueros = lista.get_solo_arqueros()
-print(f"Solo arqueros ({len(solo_arqueros)}):")
-print(solo_arqueros)
-
-solo_base = lista.get_solo_jugadores_base()
-print(f"Solo jugadores base ({len(solo_base)}):")
-print(solo_base)
 
 print("\n" + "=" * 55)
-print("  ESCENARIO 5 — Estados y polimorfismo")
+print("  ESCENARIO 4 — Estados y polimorfismo")
 print("=" * 55)
 
 mago_prueba = Mago("Dumbledore", level=3, HP=20.0, XP=0, mana=80, elemento="rayo")
