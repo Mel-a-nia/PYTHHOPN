@@ -82,4 +82,20 @@ arquero_prueba = Arquero("Ron Weasley", level=2, HP=100.0, XP=0, flechas=2, velo
 print(f"\n{arquero_prueba}")
 print(arquero_prueba.disparar())
 print(arquero_prueba.disparar())
-print(arquero_prueba.disparar())  
+print(arquero_prueba.disparar()) 
+print("\n" + "=" * 55)
+
+print("  ESCENARIO 5 — Filtrar por tipo de jugador")
+print("=" * 55)
+ 
+solo_magos = lista.get_solo_magos()
+print(f"Solo magos ({len(solo_magos)}):")
+print(solo_magos)
+ 
+solo_arqueros = lista.get_solo_arqueros()
+print(f"Solo arqueros ({len(solo_arqueros)}):")
+print(solo_arqueros)
+ 
+solo_base = lista.get_solo_jugadores_base()
+print(f"Solo jugadores base ({len(solo_base)}):")
+print(solo_base) 
