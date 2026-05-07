@@ -2,8 +2,8 @@ from lab01_2.Model3 import Player
 from lab03.Model03 import Mago, Arquero
 from lab05.collection05 import PlayerList
 from lab05.Estrategias import (
-    por_nombre, por_nivel, por_hp, por_nivel_y_nombre,
-    es_activo, es_alto_nivel,
+por_nombre, por_nivel, por_hp, por_nivel_y_nombre,
+    es_activo, es_nivel_alto,
     hacer_filtro_nivel, hacer_filtro_hp,
     a_resumen, a_nombre,
     EstrategiaOrdenarPorNivel, EstrategiaOrdenarPorHP, EstrategiaOrdenarPorNombre,
@@ -12,18 +12,17 @@ from lab05.Estrategias import (
 
 def crear_lista():
     lista = PlayerList()
-    lista.add(Player("Sasha",  level=7, HP=100.0, XP=0))
-    lista.add(Player("Connie",  level=8, HP=85.0,  XP=0))
-    lista.add(Player("El amigo de Sasha y Connie",  level=3, HP=90.0,  XP=0))
-    lista.add(Mago("Eren",   level=29, HP=75.0,  XP=0, mana=100, elemento="rayo"))
-    lista.add(Mago("Armin",    level=15, HP=60.0,  XP=0, mana=80,  elemento="fuego"))
+    lista.add(Player("Sasha la papa",  level=7, HP=100.0, XP=0))
+    lista.add(Player("Jean el caballo",  level=8, HP=85.0,  XP=0))
+    lista.add(Player("El amigo calvo  de la papa y el caballo",  level=3, HP=90.0,  XP=0))
+    lista.add(Mago("Eren el Thanos",   level=29, HP=75.0,  XP=0, mana=100, elemento="matar al 80 o 90% de la poblacion xd"))
+    lista.add(Mago("Armin el шашлык",    level=15, HP=60.0,  XP=0, mana=80,  elemento="Quemarse xD"))
     lista.add(Arquero("Levi",   level=20, HP=95.0,  XP=0, flechas=20, velocidad=12))
     lista.add(Arquero("Mikasa", level=19, HP=100.0, XP=0, flechas=15, velocidad=8))
     return lista
 
-
 print("=" * 55)
-print("  ESCENARIO 1 — Ordenar y filtrar con estrategias")
+print("  ESCENARIO 1 — sorted() y filter() con funciones")
 print("=" * 55)
 
 lista = crear_lista()
@@ -44,17 +43,16 @@ print("\nOrdenado por nivel y nombre:")
 for j in sorted(lista, key=por_nivel_y_nombre):
     print(f"  {j.name} - nivel {j.level}")
 
-print("\nSolo activos (con filter):")
+print("\nSolo activos (filter):")
 for j in list(filter(es_activo, lista)):
     print(f"  {j.name}")
 
-print("\nSolo nivel alto con filter (nivel >= 5):")
-for j in list(filter(es_alto_nivel, lista)):
+print("\nSolo nivel alto (filter, nivel >= 5):")
+for j in list(filter(es_nivel_alto, lista)):
     print(f"  {j.name} - nivel {j.level}")
 
-
 print("\n" + "=" * 55)
-print("  ESCENARIO 2 — map, fábrica de funciones y sort_by")
+print("  ESCENARIO 2 — map() y fabrica de funciones")
 print("=" * 55)
 
 lista = crear_lista()
@@ -82,26 +80,8 @@ print("\nFabrica - HP >= 90:")
 for j in list(filter(filtro_hp_90, lista)):
     print(f"  {j.name} - HP {j.HP}")
 
-print("\nsort_by(por_nivel):")
-lista.sort_by(por_nivel)
-for j in lista:
-    print(f"  {j.name} - nivel {j.level}")
-
-print("\nfilter_by(es_alto_nivel):")
-for j in lista.filter_by(es_alto_nivel):
-    print(f"  {j.name} - nivel {j.level}")
-
-print("\nfilter_by con lambda (nivel >= 5):")
-for j in lista.filter_by(lambda j: j.level >= 5):
-    print(f"  {j.name} - nivel {j.level}")
-
-print("\nmap_to a_resumen:")
-for r in lista.map_to(a_resumen):
-    print(f"  {r}")
-
-
 print("\n" + "=" * 55)
-print("  ESCENARIO 3 — Callable objects (patrón Estrategia)")
+print("  ESCENARIO 3 — Callable objects (patron Estrategia)")
 print("=" * 55)
 
 lista = crear_lista()
@@ -125,6 +105,29 @@ lista.sort_by(estrategia_nombre)
 for j in lista:
     print(f"  {j.name}")
 
+print("\n" + "=" * 55)
+print("  ESCENARIO 4 — Metodos de la coleccion")
+print("=" * 55)
+
+lista = crear_lista()
+
+print("sort_by(por_nivel):")
+lista.sort_by(por_nivel)
+for j in lista:
+    print(f"  {j.name} - nivel {j.level}")
+
+print("\nfilter_by(es_nivel_alto):")
+for j in lista.filter_by(es_nivel_alto):
+    print(f"  {j.name} - nivel {j.level}")
+
+print("\nfilter_by con lambda (nivel >= 5):")
+for j in lista.filter_by(lambda j: j.level >= 5):
+    print(f"  {j.name} - nivel {j.level}")
+
+print("\nmap_to(a_resumen):")
+for r in lista.map_to(a_resumen):
+    print(f"  {r}")
+
 print("\napply - curar a todos (HP = 100):")
 def curar(jugador):
     jugador.HP = 100.0
@@ -133,6 +136,24 @@ lista.apply(curar)
 for j in lista:
     print(f"  {j.name} - HP {j.HP}")
 
-print("\nCadena: filter_by(nivel>=5) luego sort_by(por_hp):")
-for j in lista.filter_by(es_alto_nivel).sort_by(por_hp):
+
+print("\n" + "=" * 55)
+print("  ESCENARIO 5 — Cadena filter_by > sort_by")
+print("=" * 55)
+
+lista = crear_lista()
+
+print("Cadena filter_by(es_nivel_alto) luego sort_by(por_hp):")
+for j in lista.filter_by(es_nivel_alto).sort_by(por_hp):
     print(f"  {j.name} - nivel {j.level} | HP {j.HP}")
+
+print("\nCadena filter_by(lambda HP>=80) luego sort_by(por_nombre):")
+for j in lista.filter_by(lambda j: j.HP >= 80).sort_by(por_nombre):
+    print(f"  {j.name} - HP {j.HP}")
+
+print("\nFuncion nombrada vs lambda — mismo resultado:")
+resultado_funcion = list(map(a_nombre, lista))
+resultado_lambda  = list(map(lambda j: j.name, lista))
+print(f"  funcion: {resultado_funcion}")
+print(f"  lambda:  {resultado_lambda}")
+print(f"  iguales: {resultado_funcion == resultado_lambda}")
